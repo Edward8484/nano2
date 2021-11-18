@@ -202,7 +202,7 @@ evalOp Eq VNil (VPair x y) = VBool (x == VNil)
 evalOp Eq (VPair x y) VNil = VBool (x == VNil)
 evalOp Eq VNil (VPair _ _) = VBool False
 evalOp Eq (VPair _ _) VNil = VBool False
-evalOp Eq x y = (evalOp Eq x y)
+evalOp Eq x y = if (evalOp Eq x y == VBool True) then VBool False else VBool True
 
 evalOp Eq (VPair x y) (VPair a b) = VBool ((x == a) && (y == b))
 
