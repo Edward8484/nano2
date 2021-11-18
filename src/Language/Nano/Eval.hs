@@ -169,20 +169,20 @@ eval :: Env -> Expr -> Value
 --------------------------------------------------------------------------------
 eval env e = 
   case e of
-    ENil = VNil
-    EInt x = value x
-    EBool x = VBool x
-    EVar x = lookupId x env
-    EBin x y z = evalOp x (eval env y) (eval env z)
-    ELet x y z = let a = (x, (eval a y)):ev in eval a z
+    ENil -> VNil
+    EInt x -> value x
+    EBool x -> VBool x
+    EVar x -> lookupId x env
+    EBin x y z -> evalOp x (eval env y) (eval env z)
+    ELet x y z -> let a = (x, (eval a y)):ev in eval a z
 
-    EIf x y z = if (eval env x) == (VBool True)
+    EIf x y z -> if (eval env x) == (VBool True)
       then eval env y
       else eval env z
 
-    ELam x y = VClos env x y
+    ELam x y -> VClos env x y
 
-    EApp f arg = case (eval env f) of
+    EApp f arg -> case (eval env f) of
       (VPrim p) -> p (eval env arg)
       (VClos x y z) -> eval ((y, eval env arg) : x) z
 
