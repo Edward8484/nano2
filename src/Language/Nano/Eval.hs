@@ -174,7 +174,7 @@ eval ev (EBool x) = VBool x
 eval ev (EVar x) = lookupId x ev
 eval ev (EBin x y z) = evalOp x (eval env y) (eval env z)
 
-eval 
+
 
 
 
