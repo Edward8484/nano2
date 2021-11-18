@@ -194,7 +194,7 @@ evalOp Plus (VInt x) (VInt y) = VInt(x+y)
 
 evalOp Minus (VInt x) (VInt y) = VInt(x-y)
 evalOp Mul (VInt x) (VInt y) = VInt(x*y)
-evalOp Div (VInt x) (VInt y) = VInt(x 'div' y)
+evalOp Div (VInt x) (VInt y) = VInt(x `div` y)
 
 evalOp Eq (VBool x) (VBool y) = VBool(x==y)
 evalOp Eq (VNil VNil) = VBool (True)
