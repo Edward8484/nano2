@@ -178,9 +178,11 @@ eval env (EIf x y z) = if (eval env x) == (VBool True)
   then eval env y
   else eval env z
   
+eval env (ELam x y) = VClose env x y
 
-
-
+eval env (EApp f arg) = case (eval env f) of
+  (VPrim p) -> p (eval env arg)
+  (VClos x y z) -> eval ((y, eval env arg) : x) z
 
 
 --------------------------------------------------------------------------------
