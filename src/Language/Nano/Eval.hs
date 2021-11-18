@@ -171,11 +171,11 @@ eval :: Env -> Expr -> Value
 eval ev (ENil) = VNil
 eval ev (EInt x) = value x
 eval ev (EBool x) = VBool x
-eval ev (EVar x) = lookupId x env
+eval ev (EVar x) = lookupId x ev
 eval ev (EBin x y z) = evalOp x (eval ev y) (eval ev z)
 eval ev (ELet x y z) = let a = (x, (eval a y)):ev in eval a z
 
-eval ev (EIf x y z) = if (eval env x) == (VBool True)
+eval ev (EIf x y z) = if (eval ev x) == (VBool True)
   then eval ev y
   else eval ev z
   
