@@ -190,30 +190,30 @@ eval env (EApp f arg) = case (eval env f) of
 evalOp :: Binop -> Value -> Value -> Value
 --------------------------------------------------------------------------------
 
-evalOp Plus (VInt x) (VInt y) = VInt (x+y)
+evalOp Plus (VInt x) (VInt y) = VInt (x + y)
 
-evalOp Minus (VInt x) (VInt y) = VInt(x-y)
-evalOp Mul (VInt x) (VInt y) = VInt(x*y)
+evalOp Minus (VInt x) (VInt y) = VInt(x - y)
+evalOp Mul (VInt x) (VInt y) = VInt(x * y)
 evalOp Div (VInt x) (VInt y) = VInt(x `div` y)
 
-evalOp Eq (VBool x) (VBool y) = VBool(x==y)
+evalOp Eq (VBool x) (VBool y) = VBool(x == y)
 evalOp Eq VNil VNil = VBool (True)
-evalOp Eq VNil (VPair x y) = VBool (x==VNil)
-evalOp Eq (VPair x y) VNil = VBool (x==VNil)
+evalOp Eq VNil (VPair x y) = VBool (x == VNil)
+evalOp Eq (VPair x y) VNil = VBool (x == VNil)
 evalOp Eq VNil (VPair _ _) = VBool False
 evalOp Eq (VPair _ _) VNil = VBool False
 evalOp Eq x y = if (evalOp Eq x y)
 
-evalOp Eq (VPair x y) (VPair a b) = VBool ((x==a)&&(y==b))
+evalOp Eq (VPair x y) (VPair a b) = VBool ((x == a) && (y == b))
 
-evalOp Ne (VInt x) (VInt y) = VBool(x/=y)
-evalOp Ne (VBool x) (VBool y) = VBool(x/=y)
+evalOp Ne (VInt x) (VInt y) = VBool(x /= y)
+evalOp Ne (VBool x) (VBool y) = VBool(x /= y)
 
-evalOp Lt (VInt x) (VInt y) = VBool (x<y)
-evalOp Le (VInt x) (VInt y) = VBool (x<=y)
+evalOp Lt (VInt x) (VInt y) = VBool (x < y)
+evalOp Le (VInt x) (VInt y) = VBool (x <= y)
 
-evalOp And (VBool x) (VBool y) = VBool (x&&y)
-evalOp Or (VBool x) (VBool y) = VBool(x||y)
+evalOp And (VBool x) (VBool y) = VBool (x && y)
+evalOp Or (VBool x) (VBool y) = VBool(x || y)
 
 
 
