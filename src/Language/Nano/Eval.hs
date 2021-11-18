@@ -200,18 +200,18 @@ evalOp Eq (VNil VNil) = VBool (True)
 evalOp Ne (VInt x) (VInt y) = VBool(x/=y)
 evalOp Ne (VBool x) (VBool y) = VBool(x/=y)
 
-evalOp Lt (VInt x) (VInt y) = VBool (x < y)
-evalOp Le (VInt x) (VInt y) = VBool (x <= y)
-evalOp Gt (VInt x) (VInt y) = VBool (x > y)
-evalOp Ge (VInt x) (VInt y) = VBool (x >= y)
+evalOp Lt (VInt x) (VInt y) = VBool (x<y)
+evalOp Le (VInt x) (VInt y) = VBool (x<=y)
+evalOp Gt (VInt x) (VInt y) = VBool (x>y)
+evalOp Ge (VInt x) (VInt y) = VBool (x>=y)
 
-evalOp And (VBool x) (VBool y) = VBool (x && y)
-evalOp Or (VBool x) (VBool y) = VBool (x || y)
+evalOp And (VBool x) (VBool y) = VBool (x&&y)
+evalOp Or (VBool x) (VBool y) = VBool(x||y)
 
-evalOp VNil (VPair x y) = VBool (x == VNil)
-evalOp (VPair x y) VNil = VBool (x == VNil)
+evalOp VNil (VPair x y) = VBool (x==VNil)
+evalOp (VPair x y) VNil = VBool (x==VNil)
 
-evalOp (VPair x y) (VPair a b) = VBool ((x == a) && (y == b))
+evalOp (VPair x y) (VPair a b) = VBool ((x==a) && (y==b))
 
 evalOp Cons elem VNil = VPair elem VNil
 evalOp Cons x y = VPair x y 
