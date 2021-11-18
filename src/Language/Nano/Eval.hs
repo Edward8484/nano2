@@ -187,7 +187,7 @@ eval env EIf x y z = if (eval env x) == (VBool True)
 evalOp :: Binop -> Value -> Value -> Value
 --------------------------------------------------------------------------------
 
-evalOp Plus (VInt x) (VInt y) = VInt(x + y)
+evalOp Plus (VInt x) (VInt y) = VInt (x + y)
 evalOp Minus (VInt x) (VInt y) = VInt(x - y)
 evalOp Mul (VInt x) (VInt y) = VInt(x * y)
 
