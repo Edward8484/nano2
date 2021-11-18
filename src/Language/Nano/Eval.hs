@@ -172,7 +172,9 @@ eval ev ENil = VNil
 eval ev (EInt x) = value x
 eval ev (EBool x) = VBool x
 eval ev (EVar x) = lookupId x ev
-eval ev (EBin x y z) = evalOp x (eval ev y) (eval ev z)
+eval ev (EBin x y z) = evalOp x (eval env y) (eval env z)
+
+eval 
 
 
 
@@ -186,6 +188,9 @@ evalOp Mul (VInt x) (VInt y) = VInt (x * y)
 evalOp Eq (VBool x) (VBool y) = VBool (x == y)
 evalOp Eq (VNil VNil) = VBool (True)
 evalOp And (VBool x) (VBool y) = VBool (x && y)
+evalOp Or (VBool x) (VBool y) = VBool (x || y)
+evalOp VNil (VPair x y) = VBool (x == VNil)
+evalOp (VPair x y) VNil = VBool (x == VNil)
 
 
 
