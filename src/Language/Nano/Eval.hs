@@ -173,11 +173,15 @@ eval ev (EBool x) = VBool x
 eval ev (EInt i) = VInt i
 eval ev (EVar j) = lookupId j ev
 
+eval ev (ELam x y) = VClos ev x y
+
 
 eval ev (EBin a b c) = evalOp a (eval ev b) (eval ev c)
 eval ev (EIf d e f) = if (eval ev d) == (VBool True)
   then eval ev e
   else eval ev f
+  
+  eval ev
   
 eval ev (ELet x l1 l2) = eval l3 l2
   where 
@@ -225,7 +229,7 @@ evalOp Cons _ _ = throw (Error ("Cons Error"))
 
 
 
-evalOp _ _ _ = throw (Error ("eval op parameter error"))
+-- evalOp _ _ _ = throw (Error ("eval op parameter error"))
 
 --------------------------------------------------------------------------------
 -- | `lookupId x env` returns the most recent
