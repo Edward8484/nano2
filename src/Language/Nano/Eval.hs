@@ -215,9 +215,9 @@ evalOp Lt (VInt x) (VInt y) = VBool (x < y)
 evalOp Le (VInt x) (VInt y) = VBool (x <= y)
 
 evalOp And (VBool x) (VBool y) = VBool (x && y)
-evalOp And _ _ = throw (Error ("and broken"))
+evalOp And _ _ = throw (Error ("type error"))
 evalOp Or (VBool x) (VBool y) = VBool(x || y)
-evalOp Or _ _ = throw (Error ("or broken"))
+evalOp Or _ _ = throw (Error ("type error"))
 
 
 evalOp Cons (VInt x) (VNil) = VPair (VInt x) VNil
@@ -226,7 +226,7 @@ evalOp Cons (VInt x) (VInt y) = VPair (VInt x) (VInt y)
 evalOp Cons (VInt x) (VPair y z) = VPair (VInt x) (VPair y z)
 evalOp Cons (VPair x y) (VInt z) = VPair (VPair x y) (VInt z)
 
-evalOp Cons _ _ = throw (Error ("Cons Error"))
+evalOp Cons _ _ = throw (Error ("type error"))
 
 
 
