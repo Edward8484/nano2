@@ -191,13 +191,17 @@ evalOp :: Binop -> Value -> Value -> Value
 evalOp Plus (VInt x) (VInt y) = VInt (x + y)
 evalOp Minus (VInt x) (VInt y) = VInt (x - y)
 evalOp Mul (VInt x) (VInt y) = VInt (x * y)
+
 evalOp Eq (VBool x) (VBool y) = VBool (x == y)
 evalOp Eq (VNil VNil) = VBool (True)
+
 evalOp And (VBool x) (VBool y) = VBool (x && y)
 evalOp Or (VBool x) (VBool y) = VBool (x || y)
+
 evalOp VNil (VPair x y) = VBool (x == VNil)
 evalOp (VPair x y) VNil = VBool (x == VNil)
 
+evalOp (VPair x y) (VPair a b) = VBool((x == a) && (y == b))
 
 
 
