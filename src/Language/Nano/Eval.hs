@@ -169,7 +169,7 @@ eval :: Env -> Expr -> Value
 --------------------------------------------------------------------------------
 
 eval ev ENil = VNil
-eval env EInt x = value x
+eval ev EInt x = value x
 eval env EBool x = VBool x
 eval env EVar x = lookupId x env
 eval env EBin x y z = evalOp x (eval env y) (eval env z)
@@ -187,12 +187,13 @@ eval env EIf x y z = if (eval env x) == (VBool True)
 evalOp :: Binop -> Value -> Value -> Value
 --------------------------------------------------------------------------------
 
-evalOp Plus (VInt x) (VInt y) = VInt (x + y)
+evalOp Plus (VInt x) (VInt y) = VInt(x + y)
 evalOp Minus (VInt x) (VInt y) = VInt(x - y)
 evalOp Mul (VInt x) (VInt y) = VInt(x * y)
 
 evalOp Eq (VBool x) (VBool y) = VBool(x == y)
 evalOp Eq (VNil VNil) = VBool(True)
+evalOp Ne (VInt x) (VInt y) = VBool(x /= y)
 
 evalOp And (VBool x) (VBool y) = VBool(x && y)
 evalOp Or (VBool x) (VBool y) = VBool(x || y)
