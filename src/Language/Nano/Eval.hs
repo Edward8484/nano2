@@ -181,7 +181,6 @@ eval ev (EIf d e f) = if (eval ev d) == (VBool True)
   then eval ev e
   else eval ev f
   
-  eval ev
   
 eval ev (ELet x l1 l2) = eval l3 l2
   where 
