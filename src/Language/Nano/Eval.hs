@@ -242,6 +242,10 @@ evalOp _ _ _ = throw (Error ("eval op parameter error"))
 lookupId :: Id -> Env -> Value
 --------------------------------------------------------------------------------
 lookupId x [] = throw (Error ("unbound veriable" ++ x))
+lookupId x ((key, value):ev)
+  | key == x = value
+  | env == [] = throw (Error ("LOOKUP error variable is: " ++ x)
+  | otherwise = lookupId x ev
 
 prelude :: Env
 prelude =
