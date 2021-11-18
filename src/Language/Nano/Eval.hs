@@ -169,7 +169,7 @@ eval :: Env -> Expr -> Value
 --------------------------------------------------------------------------------
 
 eval env (ENil) = VNil
-eval env (EInt x) = VInt x
+eval env (EInt x) = value x
 eval env (EBool x) = VBool x
 eval env (EVar x) = lookupId x env
 eval env (EBin x y z) = evalOp x (eval env y) (eval env z)
@@ -192,11 +192,11 @@ evalOp :: Binop -> Value -> Value -> Value
 
 evalOp Plus (VInt x) (VInt y) = VInt (x + y)
 
-evalOp Minus (VInt x) (VInt y) = VInt(x - y)
-evalOp Mul (VInt x) (VInt y) = VInt(x * y)
-evalOp Div (VInt x) (VInt y) = VInt(x `div` y)
+evalOp Minus (VInt x) (VInt y) = VInt (x - y)
+evalOp Mul (VInt x) (VInt y) = VInt (x * y)
+evalOp Div (VInt x) (VInt y) = VInt (x `div` y)
 
-evalOp Eq (VBool x) (VBool y) = VBool(x == y)
+evalOp Eq (VBool x) (VBool y) = VBool (x == y)
 evalOp Eq VNil VNil = VBool (True)
 evalOp Eq VNil (VPair x y) = VBool (x == VNil)
 evalOp Eq (VPair x y) VNil = VBool (x == VNil)
