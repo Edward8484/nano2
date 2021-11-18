@@ -173,12 +173,13 @@ eval env (EInt x) = value x
 eval env (EBool x) = VBool x
 eval env (EVar x) = lookupId x env
 eval env (EBin x y z) = evalOp x (eval env y) (eval env z)
+eval env (ELet x y z) = let a = (x, (eval a y)):env in eval a z
 
 eval env (EIf x y z) = if (eval env x) == (VBool True)
   then eval env y
   else eval env z
   
-eval env (ELam x y) = VClose env x y
+eval env (ELam x y) = VClos env x y
 
 eval env (EApp f arg) = case (eval env f) of
   (VPrim p) -> p (eval env arg)
@@ -189,7 +190,7 @@ eval env (EApp f arg) = case (eval env f) of
 evalOp :: Binop -> Value -> Value -> Value
 --------------------------------------------------------------------------------
 
-evalOp Plus (VInt x) (VInt y) = VInt(x + y)
+evalOp Plus  (VInt i1)   (VInt i2)   = VInt  (i1 + i2)
 evalOp Minus (VInt x) (VInt y) = VInt(x - y)
 evalOp Mul (VInt x) (VInt y) = VInt(x * y)
 
