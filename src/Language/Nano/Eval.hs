@@ -175,8 +175,8 @@ eval env EVar x = lookupId x env
 eval env EBin x y z = evalOp x (eval env y) (eval env z)
 
 eval env EIf x y z = if (eval env x) == (VBool True)
-  then eval ev y
-  else eval ev z
+  then eval env y
+  else eval env z
   
 
 
