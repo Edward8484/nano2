@@ -171,12 +171,17 @@ eval :: Env -> Expr -> Value
 eval ev ENil = VNil
 eval ev (EBool x) = VBool x
 eval ev (EInt i) = VInt i
-eval ev (EVar i) = lookupId i ev
-
+eval ev (EVar j) = lookupId j ev
 
 
 eval ev (EBin a b c) = evalOp a (eval ev b) (eval ev c)
-
+eval ev (EIf d e f) = if (eval ev d) == (VBool True)
+  then eval ev e
+  else eval ev f
+  
+eval ev (ELet x l1 l2) = eval l3 l2
+  where 
+    l3 = (x, (eval l3 l1)):ev
     
 
 
