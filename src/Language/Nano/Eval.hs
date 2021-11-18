@@ -168,15 +168,19 @@ exitError (Error msg) = return (VErr msg)
 eval :: Env -> Expr -> Value
 --------------------------------------------------------------------------------
 
-eval env ENil = VNil
-eval env (EInt x) = value x
-eval env (EBool x) = VBool x
-eval env (EVar x) = lookupId x env
-eval env (EBin x y z) = evalOp x (eval ev y) (eval ev z)
+eval env e =
+  case e of
+    ENil = VNil
+    (EInt x) = value x
+    (EBool x) = VBool x
+    (EVar x) = lookupId x env
+    (EBin x y z) = evalOp x (eval ev y) (eval ev z)
 
-eval env (EIf x y z) = if (eval env x) == (VBool True)
-  then eval env y
-  else eval env z
+    (EIf x y z) = if (eval env x) == (VBool True)
+      then eval env y
+      else eval env z
+  
+
 
 
 
