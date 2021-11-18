@@ -186,6 +186,7 @@ eval ev EIf x y z = if (eval ev x) == (VBool True)
 --------------------------------------------------------------------------------
 evalOp :: Binop -> Value -> Value -> Value
 --------------------------------------------------------------------------------
+
 evalOp Plus (VInt x) (VInt y) = VInt (x + y)
 evalOp Minus (VInt x) (VInt y) = VInt (x - y)
 evalOp Mul (VInt x) (VInt y) = VInt (x * y)
@@ -203,6 +204,7 @@ evalOp (VPair x y) (VPair a b) = VBool((x == a) && (y == b))
 
 
 
+evalOp _ _ _ = throw (Error ("eval op parameter error"))
 
 --------------------------------------------------------------------------------
 -- | `lookupId x env` returns the most recent
