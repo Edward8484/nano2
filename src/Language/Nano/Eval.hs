@@ -170,13 +170,13 @@ eval :: Env -> Expr -> Value
 
 eval env e =
   case e of
-    ENil = VNil
-    (EInt x) = value x
-    (EBool x) = VBool x
-    (EVar x) = lookupId x env
-    (EBin x y z) = evalOp x (eval ev y) (eval ev z)
+    ENil -> VNil
+    (EInt x) -> value x
+    (EBool x) -> VBool x
+    (EVar x) -> lookupId x env
+    (EBin x y z) -> evalOp x (eval ev y) (eval ev z)
 
-    (EIf x y z) = if (eval env x) == (VBool True)
+    (EIf x y z) -> if (eval env x) == (VBool True)
       then eval env y
       else eval env z
   
