@@ -196,7 +196,7 @@ evalOp Mul (VInt x) (VInt y) = VInt (x * y)
 evalOp Div (VInt x) (VInt y) = VInt (x `div` y)
 
 evalOp Eq (VBool x) (VBool y) = VBool (x == y)
-evalOp Eq (VInt x) (VInt y) = VBool (x == y)
+evalOp Eq (VInt i1) (VInt i2) = VBool (i1 == i2)
 evalOp Eq VNil VNil = VBool (True)
 evalOp Eq VNil (VPair _ _) = VBool False
 evalOp Eq (VPair _ _) VNil = VBool False
