@@ -219,7 +219,7 @@ evalOp Cons (VInt x) (VInt y) = VPair (VInt x) (VInt y)
 evalOp Cons (VInt x) (VPair y z) = VPair (VInt x) (VPair y z)
 evalOp Cons (VPair x y) (VInt z) = VPair (VPair x y) (VInt z)
 
-evalOp Cons _ _ = throw ("Cons Error")
+evalOp Cons _ _ = throw (Error ("Cons Error"))
 
 
 evalOp _ _ _ = throw (Error ("eval op parameter error"))
