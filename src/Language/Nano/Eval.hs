@@ -171,8 +171,8 @@ eval :: Env -> Expr -> Value
 eval ev ENil = VNil
 eval ev EInt x = value x
 eval ev EBool x = VBool x
-eval ev EVar x) -> lookupId x env
-eval ev EBin x y z) -> evalOp x (eval ev y) (eval ev z)
+eval ev EVar x = lookupId x env
+eval ev EBin x y z = evalOp x (eval ev y) (eval ev z)
 
 eval ev EIf x y z = if (eval ev x) == (VBool True)
   then eval ev y
