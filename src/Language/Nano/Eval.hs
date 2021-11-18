@@ -213,9 +213,13 @@ evalOp And (VBool x) (VBool y) = VBool (x && y)
 evalOp Or (VBool x) (VBool y) = VBool(x || y)
 
 
+evalOp Cons (VInt x) (VNil) = VPair (VInt x) VNil
+evalOp Cons (VNil) (VInt x) = VPair (VNil) (VInt x)
+evalOp Cons (VInt x) (VInt y) = VPair (VInt x) (VInt y)
+evalOp Cons (VInt x) (VPair y z) = VPair (VInt x) (VPair y z)
+evalOp Cons (VPair x y) (VInt z) = VPair (VPair x y) (VInt z)
 
-evalOp Cons elem VNil = VPair elem VNil
-evalOp Cons x y = VPair x y 
+evalOp Cons _ _ = throw ("Cons Error")
 
 
 evalOp _ _ _ = throw (Error ("eval op parameter error"))
