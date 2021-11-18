@@ -183,7 +183,9 @@ eval ev (ELet x l1 l2) = eval l3 l2
   where 
     l3 = (x, (eval l3 l1)):ev
     
-
+eval env (EApp f arg) = case (eval env f) of
+  (VPrim p) -> p (eval env arg)
+  (VClos x y z) -> eval ((y, eval env arg) : x) z
 
 --------------------------------------------------------------------------------
 evalOp :: Binop -> Value -> Value -> Value
@@ -220,6 +222,7 @@ evalOp Cons (VInt x) (VPair y z) = VPair (VInt x) (VPair y z)
 evalOp Cons (VPair x y) (VInt z) = VPair (VPair x y) (VInt z)
 
 evalOp Cons _ _ = throw (Error ("Cons Error"))
+
 
 
 evalOp _ _ _ = throw (Error ("eval op parameter error"))
