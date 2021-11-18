@@ -175,13 +175,13 @@ eval ev (EVar x) = lookupId x env
 eval ev (EBin x y z) = evalOp x (eval ev y) (eval ev z)
 eval ev (ELet x y z) = let a = (x, (eval a y)):ev in eval a z
 
-eval env (EIf x y z) = if (eval env x) == (VBool True)
+eval ev (EIf x y z) = if (eval env x) == (VBool True)
   then eval ev y
   else eval ev z
   
-eval env (ELam x y) = VClos ev x y
+eval ev (ELam x y) = VClos ev x y
 
-eval env (EApp f arg) = case (eval ev f) of
+eval ev (EApp f arg) = case (eval ev f) of
   (VPrim p) -> p (eval ev arg)
   (VClos x y z) -> eval ((y, eval ev arg) : x) z
 
