@@ -168,7 +168,7 @@ exitError (Error msg) = return (VErr msg)
 eval :: Env -> Expr -> Value
 --------------------------------------------------------------------------------
 
-eval ev ENIL = VNil
+eval ev ENil = VNil
 eval ev (EInt x) = value x
 eval ev (EBool x) = VBool x
 
