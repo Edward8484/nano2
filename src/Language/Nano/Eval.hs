@@ -183,7 +183,7 @@ evalOp :: Binop -> Value -> Value -> Value
 evalOp Plus (VInt x) (VInt y) = VInt (x+y)
 evalOp Minus (VInt x) (VInt y) = VInt (x-y)
 evalOp Mul (VInt x) (VInt y) = VInt (x*y)
-eval Eq (VInt x) (VInt y) = VBool (x == y)
+eval Eq (VBool x) (VBool y) = VBool (x == y)
 
 
 
