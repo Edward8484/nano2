@@ -182,9 +182,7 @@ eval env e =
 
     ELam x y -> VClos env x y
 
-    EApp f arg -> case (eval env f) of
-      (VPrim p) -> p (eval env arg)
-      (VClos x y z) -> eval ((y, eval env arg) : x) z
+    
 
 
 --------------------------------------------------------------------------------
