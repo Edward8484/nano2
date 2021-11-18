@@ -167,12 +167,20 @@ exitError (Error msg) = return (VErr msg)
 --------------------------------------------------------------------------------
 eval :: Env -> Expr -> Value
 --------------------------------------------------------------------------------
-eval = error "TBD:eval"
+
+eval ev ENIL = VNil
+eval ev (EInt x) = value x
+eval ev (EBool x) = VBool x
+
+
+
 
 --------------------------------------------------------------------------------
 evalOp :: Binop -> Value -> Value -> Value
 --------------------------------------------------------------------------------
-evalOp = error "TBD:evalOp"
+evalOp Plus (VInt x) (VInt y) = VInt (x+y)
+evalOp Minus (VInt x) (VInt y) = VInt (x-y)
+evalOp Mul (VInt x) (VInt y) = VInt (x*y)
 
 --------------------------------------------------------------------------------
 -- | `lookupId x env` returns the most recent
@@ -191,12 +199,14 @@ evalOp = error "TBD:evalOp"
 --------------------------------------------------------------------------------
 lookupId :: Id -> Env -> Value
 --------------------------------------------------------------------------------
-lookupId = error "TBD:lookupId"
+lookupId x [] = throw (Error ("unbound veriable" ++ x))
 
 prelude :: Env
 prelude =
   [ -- HINT: you may extend this "built-in" environment
     -- with some "operators" that you find useful...
+    ("head", VPrim (\(VPair x y) -> x)),
+    ("tail", VPrim (\(VPair x y) -> y))
   ]
 
 env0 :: Env
