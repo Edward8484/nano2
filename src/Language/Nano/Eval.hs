@@ -190,7 +190,7 @@ eval env (EApp f arg) = case (eval env f) of
 evalOp :: Binop -> Value -> Value -> Value
 --------------------------------------------------------------------------------
 
-evalOp Plus  (VInt i1)   (VInt i2)   = VInt  (i1 + i2)
+evalOp Plus (VInt x) (VInt y) = VInt(x + y)
 evalOp Minus (VInt x) (VInt y) = VInt(x - y)
 evalOp Mul (VInt x) (VInt y) = VInt(x * y)
 
